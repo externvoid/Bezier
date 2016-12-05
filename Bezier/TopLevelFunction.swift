@@ -16,23 +16,27 @@ func TopLevelFunction() {
   print("OK")
 }
 
-func minmax(result: [[String]], inout ar: [[Double]]) -> (Double, Double) {
+func minmax(_ result: [[String]], ar: inout [[Double]]) -> (Double, Double) {
   //  taking part of Array
   let result0 = result.map( {Array($0[1...4])} )
   ar = result0.map({$0.map({atof($0)})})
   var max: Double = -1.0, min: Double = 1.0e38
   for e in ar {
-    max = e.reduce(max, combine: {$0>$1 ? $0 : $1})
-    min = e.reduce(min, combine: {$0<$1 ? $0 : $1})
+    max = e.reduce(max, {$0>$1 ? $0 : $1})
+    min = e.reduce(min, {$0<$1 ? $0 : $1})
   }
   return (min, max)
 }
 
-func logiToScreen(ar: [[Double]], tap: (Double, Double)) -> [[Double]] {
-  let h:Double = tap.1 - tap.0,scH:Double = 480.0 //Double(
+func logiToScreen(_ ar: [[Double]], tap: (Double, Double)) -> [[Double]] {
+  let h:Double = tap.1 - tap.0,scH2:Double = 480.0 //Double(
 //                                   UIScreen.mainScreen().bounds.size.height)
+  // rootViewController.subViews.first
+  let app = UIApplication.shared.delegate as! AppDelegate
+  let scH = Double(app.window!.rootViewController!.view.subviews.first!.bounds.size.height)
+  
   print("shH=\(scH)")
-  let scW:Double = Double(UIScreen.mainScreen().bounds.size.width)
+  let scW:Double = Double(UIScreen.main.bounds.size.width)
   print("shW=\(scW)")
 
   let b:Double = -scH/h, oy: Double = tap.0
@@ -42,3 +46,4 @@ func logiToScreen(ar: [[Double]], tap: (Double, Double)) -> [[Double]] {
   
   return candle
 }
+// iPhone7の横幅？TestDraw Viewの大きさ取得は？

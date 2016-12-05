@@ -9,15 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-  var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate
+  var appDelegate: AppDelegate = UIApplication.shared.delegate
     as! AppDelegate
   override func viewDidLoad() {
     super.viewDidLoad()
     let screenWidth = self.view.bounds.width
     let screenHeight = self.view.bounds.height
-    let testDraw = TestDraw(frame: CGRectMake(20, 20, screenWidth - 40, screenHeight - 140))
-    self.view.backgroundColor = UIColor.blueColor()
-    testDraw.backgroundColor = UIColor.yellowColor()
+    let testDraw = TestDraw(frame: CGRect(x: 20, y: 20, width: screenWidth - 40, height: screenHeight - 140))
+    self.view.backgroundColor = UIColor.blue
+    testDraw.backgroundColor = UIColor.yellow
     self.view.addSubview(testDraw)
 //    self
   }
